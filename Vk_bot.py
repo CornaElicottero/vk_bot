@@ -25,7 +25,7 @@ def weekday(day):
         return 'воскресенье'
 
 
-def get_weather_today() -> list:
+'''def get_weather_today() -> list:
     http = "https://sinoptik.com.ru/погода-сургут-101490624"
     b = BeautifulSoup(requests.get(http).text, "html.parser")
 
@@ -46,6 +46,7 @@ def get_weather_today() -> list:
     result = result + weather.strip()
 
     return result
+'''
 
 
 def quote():
@@ -141,7 +142,7 @@ def getLesson():
     return 'Сейчас уроков нет'
 
 
-file = open('Расписание_звонков.txt', 'r')
+file = open('alarm_schedule.txt', 'r')
 RTimetable = []
 RDay = []
 c = 0
@@ -185,7 +186,7 @@ for Day in RTimetable:
     k = 0
     RTimetable[c] = Day
     c += 1
-file = open('Расписание_уроков.txt', 'r')
+file = open('subject_schedule.txt', 'r')
 LTimetable = []
 LDay = []
 c = 0
@@ -228,14 +229,13 @@ insult_good = ["Любое сходство между вами и челове�
                "Я знаю, вы родились глупым, но почему у вас рецидив?",
                "Я знаю, вы не так глупы, как выглядите. Такое невозможно!",
                "Я видел людей, как ты, но тогда я должен был заплатить за билет!"]
-F = open('BD.txt')
+F = open('bd.txt')
 vk_session = vk_api.VkApi(token='6691eb9b8d09d68cc022c09dbc9de5bf06c11834610b1af00117c683fb5311dd66cdcb10015e9135d366b')
 
 longpoll = VkLongPoll(vk_session)
 vk = vk_session.get_api()
 session = requests.Session()
 count = 0
-
 upload = VkUpload(vk_session)
 while True:
     try:
@@ -252,7 +252,7 @@ while True:
                         )
                 elif event.text == '!подписка' or event.text == '!Подписка':
                     if event.from_user:
-                        F = open('BD.txt', 'r+')
+                        F = open('bd.txt', 'r+')
                         if (str(event.user_id) + '\n') in F.readlines():
                             vk.messages.send(
                                 user_id=event.user_id,
@@ -268,12 +268,12 @@ while True:
                                 random_id=event.random_id,
                                 keyboard=open('keyboard.json', 'r', encoding='UTF-8').read()
                             )
-                            F = open('BD.txt', 'a')
+                            F = open('bd.txt', 'a')
                             F.write(str(event.user_id) + '\n')
                             F.close()
                 elif event.text == '!отписка' or event.text == '!Отписка':
                     if event.from_user:
-                        F = open('BD.txt', 'r')
+                        F = open('bd.txt', 'r')
                         a = F.readlines()
                         if (str(event.user_id) + '\n') in a:
                             vk.messages.send(
@@ -283,7 +283,7 @@ while True:
                                 keyboard=open('keyboard.json', 'r', encoding='UTF-8').read()
                             )
                             F.close()
-                            F = open('BD.txt', 'w')
+                            F = open('bd.txt', 'w')
                             for line in a:
                                 if line != (str(event.user_id) + '\n'):
                                     F.write(line)
@@ -318,7 +318,7 @@ while True:
                     if event.from_user:
                         vk.messages.send(
                             user_id=event.user_id,
-                            message=get_weather_today(),
+                            message=weatherNow(),
                             random_id=event.random_id,
                             keyboard=open('keyboard.json', 'r', encoding='UTF-8').read()
                         )
@@ -358,7 +358,7 @@ while True:
                         )
                 elif '!рассылка' in event.text:
                     if event.from_user and event.user_id == 229651397:
-                        F = open('BD.txt', 'r')
+                        F = open('bd.txt', 'r')
                         a = F.readlines()
                         F.close()
                         try:
@@ -371,7 +371,7 @@ while True:
                                              random_id=0)
                 elif event.text == '!подпискаМемы' or event.text == '!ПодпискаМемы':
                     if event.from_user:
-                        F = open('BDMEMES.txt', 'r+')
+                        F = open('bd_memes.txt', 'r+')
                         if (str(event.user_id) + '\n') in F.readlines():
                             vk.messages.send(
                                 user_id=event.user_id,
@@ -385,12 +385,12 @@ while True:
                                 message='Вы были подписаны на рассылку мемов!',
                                 random_id=event.random_id
                             )
-                            F = open('BDMEMES.txt', 'a')
+                            F = open('bd_memes.txt', 'a')
                             F.write(str(event.user_id) + '\n')
                             F.close()
                 elif event.text == '!отпискаМемы' or event.text == '!ОтпискаМемы':
                     if event.from_user:
-                        F = open('BDMEMES.txt', 'r')
+                        F = open('bd_memes.txt', 'r')
                         a = F.readlines()
                         if (str(event.user_id) + '\n') in a:
                             vk.messages.send(
@@ -399,7 +399,7 @@ while True:
                                 random_id=event.random_id
                             )
                             F.close()
-                            F = open('BDMEMES.txt', 'w')
+                            F = open('bd_memes.txt', 'w')
                             for line in a:
                                 if line != (str(event.user_id) + '\n'):
                                     F.write(line)
@@ -413,7 +413,7 @@ while True:
                 elif '!Мемы' in event.text:
                     attachments = []
                     if event.from_user and event.user_id == 229651397:
-                        F = open('BDMEMES.txt', 'r')
+                        F = open('bd_memes.txt', 'r')
                         a = F.readlines()
                         F.close()
                         image_url = str(event.text[5:])

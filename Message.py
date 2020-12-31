@@ -6,7 +6,7 @@ longpoll = VkLongPoll(vk_session)
 vk_api = vk_session.get_api()
 while True:
     A = input()
-    F = open('BD.txt', 'r')
+    F = open('bd.txt', 'r')
     a = F.readlines()
     F.close()
     for i in a:
