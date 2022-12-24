@@ -1,0 +1,51 @@
+{
+  "one_time": false,
+  "buttons": [
+    [{
+      "action": {
+        "type": "text",
+        "label": "Погода"
+      },
+      "color": "default"
+    }],
+    [{
+      "action": {
+        "type": "text",
+        "label": "Какой урок?"
+      },
+      "color": "primary"
+    },
+     {
+        "action": {
+          "type": "text",
+          "label": "Сколько до звонка?"
+        },
+        "color": "primary"
+    }
+	],
+	[{"action": {
+        "type": "text",
+        "label": "!подписка"
+      },
+      "color": "positive"
+    },{
+	"action": {
+        "type": "text",
+        "label": "!отписка"
+      },
+      "color": "negative"
+    }],
+	[{"action": {
+        "type": "text",
+        "label": "!подпискаМемы"
+      },
+      "color": "positive"
+    },{
+	"action": {
+        "type": "text",
+        "label": "!отпискаМемы"
+      },
+      "color": "negative"
+    }]
+  ]
+}
